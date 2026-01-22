@@ -107,6 +107,23 @@ https://github.com/ZLMediaKit/ZLMediaKit/wiki/vcpkg%E6%96%B9%E5%BC%8F%E5%AE%89%E
 规则
 https://blog.csdn.net/qq_29752857/article/details/132320679?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-132320679-blog-132561137.235^v43^pc_blog_bottom_relevance_base2&spm=1001.2101.3001.4242.1&utm_relevant_index=2
 
+可以查看到引用
+https://github.com/ZLMediaKit/ZLMediaKit/blob/master/.gitmodules
+内容如下,只需要更新url = https://gitee.com/victor1002/zlm_webassist即可
+############################################################################################
+[submodule "ZLToolKit"]
+	path = 3rdpart/ZLToolKit
+	url = https://gitee.com/xia-chu/ZLToolKit
+[submodule "3rdpart/media-server"]
+	path = 3rdpart/media-server
+	url = https://gitee.com/ireader/media-server
+[submodule "3rdpart/jsoncpp"]
+	path = 3rdpart/jsoncpp
+	url = https://gitee.com/mirrors/jsoncpp.git
+[submodule "www/webassist"]
+	path = www/webassist
+	url = https://gitee.com/victor1002/zlm_webassist
+############################################################################################
 
 
 遗失的文件
