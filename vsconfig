@@ -32,6 +32,12 @@ indent-rainbow
 One Dark Pro
 
 
+查看宏定义 / 函数
+Ctrl+T‌ (Windows/Linux) 
+Ctrl+Shift+O‌ (Windows/Linux) 
+F12‌：跳转到符号定义处，将光标放在宏名上按此键可跳转
+Shift+F12‌：查找所有引用，查看宏在项目中的使用位置。
+‌Ctrl+Shift+F‌ (Windows/Linux) 或 ‌Cmd+Shift+F‌ (macOS)：全局文本搜索，输入宏名可查找所有出现位置。
 
 
 
