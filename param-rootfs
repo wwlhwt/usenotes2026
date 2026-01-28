@@ -1,0 +1,193 @@
+
+
+ORG
+CMDLINE: mtdparts=rk29xxnand:0x00002000@0x00004000(uboot),0x00002000@0x00006000(misc),0x00020000@0x00008000(boot),0x00020000@0x00028000(recovery),0x00010000@0x00048000(backup),0x00c00000@0x00058000(rootfs),0x00040000@0x00c58000(oem),-@0x00c98000(userdata:grow)
+uuid:rootfs=614e0000-0000-4b53-8000-1d28000054a9
+
+
+
+
+
+now
+CMDLINE: mtdparts=rk29xxnand:0x00002000@0x00004000(uboot),0x00002000@0x00006000(misc),0x00020000@0x00008000(boot),0x00020000@0x00028000(recovery),0x00010000@0x00048000(backup),0x00040000@0x00058000(oem),0x00200000@0x00098000(userdata),-@0x00298000(rootfs:grow)
+uuid:rootfs=614e0000-0000-4b53-8000-1d28000054a9
+
+
+
+
+
+ adb push .\torch-2.6.0+cu126-cp39-cp39-linux_aarch64.whl /userdata/cuda
+ python3.9 -m pip install torch-2.6.0+cpu-cp39-cp39-linux_aarch64.whl
+ python3.9 -m pip install opencv-python numpy crcmod reedsolo
+ 
+ #####################
+  sudo parted -l
+Model: MMC AJTD4R (sd/mmc)
+Disk /dev/mmcblk0: 15.6GB
+Sector size (logical/physical): 512B/512B
+Partition Table: gpt
+Disk Flags:
+
+Number  Start   End     Size    File system  Name      Flags
+ 1      8389kB  12.6MB  4194kB               uboot
+ 2      12.6MB  16.8MB  4194kB               misc
+ 3      16.8MB  83.9MB  67.1MB               boot
+ 4      83.9MB  151MB   67.1MB               recovery
+ 5      151MB   185MB   33.6MB               backup
+ 6      185MB   6627MB  6442MB  ext4         rootfs
+ 7      6627MB  6761MB  134MB   ext2         oem
+ 8      6761MB  15.6GB  8873MB  ext2         userdata
+
+
+Error: /dev/mmcblk0boot0: unrecognised disk label
+Model: Generic SD/MMC Storage Card (sd/mmc)
+Disk /dev/mmcblk0boot0: 4194kB
+Sector size (logical/physical): 512B/512B
+Partition Table: unknown
+Disk Flags:
+
+Error: /dev/mmcblk0boot1: unrecognised disk label
+Model: Generic SD/MMC Storage Card (sd/mmc)
+Disk /dev/mmcblk0boot1: 4194kB
+Sector size (logical/physical): 512B/512B
+Partition Table: unknown
+Disk Flags:
+
+
+
+
+#####################
+sudo fdisk -l
+Disk /dev/ram0: 4 MiB, 4194304 bytes, 8192 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+
+Disk /dev/mmcblk0: 14.57 GiB, 15634268160 bytes, 30535680 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: F7100000-0000-4534-8000-609D000071B6
+
+Device            Start      End  Sectors  Size Type
+/dev/mmcblk0p1    16384    24575     8192    4M unknown
+/dev/mmcblk0p2    24576    32767     8192    4M unknown
+/dev/mmcblk0p3    32768   163839   131072   64M unknown
+/dev/mmcblk0p4   163840   294911   131072   64M unknown
+/dev/mmcblk0p5   294912   360447    65536   32M unknown
+/dev/mmcblk0p6   360448 12943359 12582912    6G unknown
+/dev/mmcblk0p7 12943360 13205503   262144  128M unknown
+/dev/mmcblk0p8 13205504 30535615 17330112  8.3G unknown
+
+
+##############
+lsblk
+NAME         MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+mmcblk0      179:0    0 14.6G  0 disk
+|-mmcblk0p1  179:1    0    4M  0 part
+|-mmcblk0p2  179:2    0    4M  0 part
+|-mmcblk0p3  179:3    0   64M  0 part
+|-mmcblk0p4  179:4    0   64M  0 part
+|-mmcblk0p5  179:5    0   32M  0 part
+|-mmcblk0p6  179:6    0    6G  0 part /
+|-mmcblk0p7  179:7    0  128M  0 part /oem
+`-mmcblk0p8  179:8    0  8.3G  0 part /userdata
+mmcblk0boot0 179:32   0    4M  1 disk
+mmcblk0boot1 179:64   0    4M  1 disk
+
+
+
+
+
+######################################修改后#########################################
+
+root@localhost:~#
+root@localhost:~#  sudo parted -l
+Model: MMC AJTD4R (sd/mmc)
+Disk /dev/mmcblk0: 15.6GB
+Sector size (logical/physical): 512B/512B
+Partition Table: gpt
+Disk Flags:
+
+Number  Start   End     Size    File system  Name      Flags
+ 1      8389kB  12.6MB  4194kB               uboot
+ 2      12.6MB  16.8MB  4194kB               misc
+ 3      16.8MB  83.9MB  67.1MB               boot
+ 4      83.9MB  151MB   67.1MB               recovery
+ 5      151MB   185MB   33.6MB               backup
+ 6      185MB   319MB   134MB   ext2         oem
+ 7      319MB   1393MB  1074MB  ext2         userdata
+ 8      1393MB  15.6GB  14.2GB  ext4         rootfs
+
+
+Error: /dev/mmcblk0boot0: unrecognised disk label
+Model: Generic SD/MMC Storage Card (sd/mmc)
+Disk /dev/mmcblk0boot0: 4194kB
+Sector size (logical/physical): 512B/512B
+Partition Table: unknown
+Disk Flags:
+
+Error: /dev/mmcblk0boot1: unrecognised disk label
+Model: Generic SD/MMC Storage Card (sd/mmc)
+Disk /dev/mmcblk0boot1: 4194kB
+Sector size (logical/physical): 512B/512B
+Partition Table: unknown
+Disk Flags:
+
+root@localhost:~#
+root@localhost:~#
+root@localhost:~#
+root@localhost:~#
+root@localhost:~#
+root@localhost:~#
+root@localhost:~#
+root@localhost:~#
+root@localhost:~# sudo fdisk -l
+Disk /dev/ram0: 4 MiB, 4194304 bytes, 8192 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+
+Disk /dev/mmcblk0: 14.57 GiB, 15634268160 bytes, 30535680 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: E8410000-0000-4A20-8000-40C100002DD4
+
+Device           Start      End  Sectors  Size Type
+/dev/mmcblk0p1   16384    24575     8192    4M unknown
+/dev/mmcblk0p2   24576    32767     8192    4M unknown
+/dev/mmcblk0p3   32768   163839   131072   64M unknown
+/dev/mmcblk0p4  163840   294911   131072   64M unknown
+/dev/mmcblk0p5  294912   360447    65536   32M unknown
+/dev/mmcblk0p6  360448   622591   262144  128M unknown
+/dev/mmcblk0p7  622592  2719743  2097152    1G unknown
+/dev/mmcblk0p8 2719744 30535646 27815903 13.3G unknown
+root@localhost:~# lsblk
+NAME         MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+mmcblk0      179:0    0 14.6G  0 disk
+├─mmcblk0p1  179:1    0    4M  0 part
+├─mmcblk0p2  179:2    0    4M  0 part
+├─mmcblk0p3  179:3    0   64M  0 part
+├─mmcblk0p4  179:4    0   64M  0 part
+├─mmcblk0p5  179:5    0   32M  0 part
+├─mmcblk0p6  179:6    0  128M  0 part /oem
+├─mmcblk0p7  179:7    0    1G  0 part /userdata
+└─mmcblk0p8  179:8    0 13.3G  0 part /
+mmcblk0boot0 179:32   0    4M  1 disk
+mmcblk0boot1 179:64   0    4M  1 disk
+root@localhost:~#
+
+
+
+
+
+
+
+
+
+
