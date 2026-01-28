@@ -1,0 +1,144 @@
+sudo fallocate -l 3G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+##logs
+Setting up swapspace version 1, size = 3 GiB (3221221376 bytes)
+no label, UUID=559d5436-63b9-4795-94ab-4d69d11d9c9f
+sudo swapon /swapfile
+//clear
+sudo swapoff /swapfile
+sudo rm /swapfile
+
+
+
+
+
+#########################################################################################################
+指令 开始 ---------- index 1
+#########################################################################################################
+
+ #####################
+  sudo parted -l
+Model: MMC AJTD4R (sd/mmc)
+Disk /dev/mmcblk0: 15.6GB
+Sector size (logical/physical): 512B/512B
+Partition Table: gpt
+Disk Flags:
+
+Number  Start   End     Size    File system  Name      Flags
+ 1      8389kB  12.6MB  4194kB               uboot
+ 2      12.6MB  16.8MB  4194kB               misc
+ 3      16.8MB  83.9MB  67.1MB               boot
+ 4      83.9MB  151MB   67.1MB               recovery
+ 5      151MB   185MB   33.6MB               backup
+ 6      185MB   6627MB  6442MB  ext4         rootfs
+ 7      6627MB  6761MB  134MB   ext2         oem
+ 8      6761MB  15.6GB  8873MB  ext2         userdata
+
+
+Error: /dev/mmcblk0boot0: unrecognised disk label
+Model: Generic SD/MMC Storage Card (sd/mmc)
+Disk /dev/mmcblk0boot0: 4194kB
+Sector size (logical/physical): 512B/512B
+Partition Table: unknown
+Disk Flags:
+
+Error: /dev/mmcblk0boot1: unrecognised disk label
+Model: Generic SD/MMC Storage Card (sd/mmc)
+Disk /dev/mmcblk0boot1: 4194kB
+Sector size (logical/physical): 512B/512B
+Partition Table: unknown
+Disk Flags:
+
+
+
+
+#####################
+sudo fdisk -l
+Disk /dev/ram0: 4 MiB, 4194304 bytes, 8192 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+
+Disk /dev/mmcblk0: 14.57 GiB, 15634268160 bytes, 30535680 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: F7100000-0000-4534-8000-609D000071B6
+
+Device            Start      End  Sectors  Size Type
+/dev/mmcblk0p1    16384    24575     8192    4M unknown
+/dev/mmcblk0p2    24576    32767     8192    4M unknown
+/dev/mmcblk0p3    32768   163839   131072   64M unknown
+/dev/mmcblk0p4   163840   294911   131072   64M unknown
+/dev/mmcblk0p5   294912   360447    65536   32M unknown
+/dev/mmcblk0p6   360448 12943359 12582912    6G unknown
+/dev/mmcblk0p7 12943360 13205503   262144  128M unknown
+/dev/mmcblk0p8 13205504 30535615 17330112  8.3G unknown
+
+
+##############
+lsblk
+NAME         MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+mmcblk0      179:0    0 14.6G  0 disk
+|-mmcblk0p1  179:1    0    4M  0 part
+|-mmcblk0p2  179:2    0    4M  0 part
+|-mmcblk0p3  179:3    0   64M  0 part
+|-mmcblk0p4  179:4    0   64M  0 part
+|-mmcblk0p5  179:5    0   32M  0 part
+|-mmcblk0p6  179:6    0    6G  0 part /
+|-mmcblk0p7  179:7    0  128M  0 part /oem
+`-mmcblk0p8  179:8    0  8.3G  0 part /userdata
+mmcblk0boot0 179:32   0    4M  1 disk
+mmcblk0boot1 179:64   0    4M  1 disk
+
+
+
+
+/etc/systemd/system/multi-user.target.wants/resize-disk.service:8:ExecStart=/etc/init.d/resize-disk.sh start
+
+
+ffmpeg -stream_loop -1 -re -i ~/Downloads/source.200kbps.768x320.flv -acodec copy -vcodec copy -f flv  rtmp://ip:port/live/test
+
+ffmpeg -stream_loop -1 -re -i ~/Downloads/source.200kbps.768x320.flv -acodec copy -vcodec copy -f flv  rtmp://ip:port/live/test
+
+
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+
+sudo apt update
+sudo apt install python3.9
+
+
+strings
+sudo apt install binutils
+
+strings /usr/lib/aarch64-linux-gnu/libc.so.6 | grep GLIBC
+
+2.30.
+
+sudo apt install -y python3.9-pip
+sudo apt install -y python3.9-dev python3.9-venv
+
+#########################################################################################################
+指令 结束 ---------- index 1
+#########################################################################################################
+
+
+
+
+
+ORG
+CMDLINE: mtdparts=rk29xxnand:0x00002000@0x00004000(uboot),0x00002000@0x00006000(misc),0x00020000@0x00008000(boot),0x00020000@0x00028000(recovery),0x00010000@0x00048000(backup),0x00c00000@0x00058000(rootfs),0x00040000@0x00c58000(oem),-@0x00c98000(userdata:grow)
+uuid:rootfs=614e0000-0000-4b53-8000-1d28000054a9
+
+
+
+
+
+now
+CMDLINE: mtdparts=rk29xxnand:0x00002000@0x00004000(uboot),0x00002000@0x00006000(misc),0x00020000@0x00008000(boot),0x00020000@0x00028000(recovery),0x00010000@0x00048000(backup),0x00040000@0x00058000(oem),0x00200000@0x00098000(userdata),-@0x00298000(rootfs:grow)
+uuid:rootfs=614e0000-0000-4b53-8000-1d28000054a9
