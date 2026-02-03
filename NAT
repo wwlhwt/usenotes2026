@@ -1,0 +1,37 @@
+
+iptables -t nat -L -n -v
+
+##########################################################################################
+# py
+##########################################################################################
+source myproject_env/bin/activate
+deactivate
+
+
+
+##########################################################################################
+# v4
+##########################################################################################
+vi /etc/sysctl.conf
+net.ipv4.ip_forward = 1
+sysctl -p
+
+
+echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
+
+
+或者
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+# DHCP=ipv4
+
+
+iptables -t nat -L -n -v
+cat /proc/net/nf_conntrack
+
+
+iptables -t nat -A POSTROUTING -o eth1 -j SNAT --to-source 192.168.235.100
+iptables -t nat -D POSTROUTING -o eth1 -j SNAT --to-source 192.168.235.100
+iptables -t nat -F POSTROUTING
+
+
