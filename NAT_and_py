@@ -18,6 +18,36 @@ source myproject_env/bin/activate
 deactivate
 
 
+##########################################################################################
+# py miniconda
+##########################################################################################
+https://blog.csdn.net/CATTLE_L/article/details/150451112
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+也可以去这里选择想要的版本-- 不重要
+    https://repo.anaconda.com/miniconda 
+
+# 创建一个名为rknn-toolkit2的虚拟环境，并指定python版本
+conda create -n rknn-toolkit2 python=3.8
+conda activate rknn-toolkit2
+
+###
+cd lbcat_code/dev_env/rknn_toolkit2
+
+# 配置pip源
+pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple/
+
+# 安装依赖库
+pip3 install numpy
+pip3 install -r doc/requirements_cp38-1.5.0.txt
+
+# 安装rknn_toolkit2
+pip3 install packages/rknn_toolkit2-1.5.0+1fa95b5c-cp38-cp38-linux_x86_64.whl
+//链接 doc
+https://blog.csdn.net/CATTLE_L/article/details/150451112
+
+
+
+
 
 ##########################################################################################
 # v4
