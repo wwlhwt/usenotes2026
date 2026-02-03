@@ -40,8 +40,8 @@ iptables -t nat -L -n -v
 cat /proc/net/nf_conntrack
 
 
-iptables -t nat -A POSTROUTING -o eth1 -j SNAT --to-source 192.168.235.100
-iptables -t nat -D POSTROUTING -o eth1 -j SNAT --to-source 192.168.235.100
+iptables -t nat -A POSTROUTING -o eth1 -j SNAT --to-source 192.168.1.111
+iptables -t nat -D POSTROUTING -o eth1 -j SNAT --to-source 192.168.1.111
 iptables -t nat -F POSTROUTING
 
 
