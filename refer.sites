@@ -181,3 +181,33 @@ hdx
 #######################################################
 hdx
 https://mh-nexus.de/en/downloads.php?product=HxD20
+
+
+#######################################################
+hik used 
+#######################################################
+ffmpeg -rtsp_transport tcp -fflags +genpts -analyzeduration 10000000 -probesize 10000000 -buffer_size 10000000 -max_delay 500000 -i rtsp://admin:admin@192.168.202.11:554/Streaming/Channels/101 -c copy -f rtsp rtsp://192.168.200.237/live/test
+
+优化整合 - 没试过
+ffmpeg -re -threads 4 -rtsp_transport tcp -fflags +genpts -analyzeduration 10000000 -probesize 10000000 -buffer_size 10000000 -max_delay 500000 -stimeout 5000000 -i rtsp://admin:w05r03b05@192.168.11.64:554/Streaming/Channels/101 -c copy -f rtsp rtsp://192.168.0.237/live/test
+
+修改配置可以重新拉取
+
+#######################################################
+others 不全
+#######################################################
+iptables -t nat -L -n -v
+cat /proc/net/nf_conntrack
+
+iptables -t nat -A POSTROUTING -o ens -j SNAT --to-source 192.168.168.100
+iptables -t nat -D POSTROUTING -o ens -j SNAT --to-source 192.168.168.100
+iptables -t nat -F POSTROUTING
+
+iptables -t nat -A POSTROUTING -o ens -j SNAT --to-source 192.168.168.100
+route add 192.168.168.254 192.168.200.100
+
+ffmpeg  -re -i E:\setup\tools\11.mp4 -c:v libx264 -preset ultrafast -tune  zerolatency -profile:v baseline -level 3.0  -pix_fmt yuv420p -g 60 -keyint_min 60 -maxrate 2000k -bufsize 4000k -c:a aac -b:a 128k -ar 44100 -ac 2 -f flv  rtmp://192.168.0.236:1935/live/test^C
+PS C:\Users\Administrator>
+
+ffmpeg  -re -i E:\setup\tools\11.mp4 -c:v libx264 -preset ultrafast -tune  zerolatency -profile:v baseline -level 3.0  -pix_fmt yuv420p -g 60 -keyint_min 60 -maxrate 2000k -bufsize 4000k -c:a aac -b:a 128k -ar 44100 -ac 2 -f flv  rtmp://192.168.0.236:1935/live/test^C
+PS C:\Users\Administrator>
